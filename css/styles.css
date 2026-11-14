@@ -1,3 +1,133 @@
+
+/* =================================
+   PORTFOLIO ANIMATION ENHANCEMENTS
+================================= */
+
+/* Hero section entrance */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-text > * {
+    animation: fadeUp 0.8s ease both;
+}
+
+.hero-text .kicker { animation-delay: 0.1s; }
+.hero-text h1 { animation-delay: 0.2s; }
+.hero-text .role { animation-delay: 0.3s; }
+.hero-text .lead { animation-delay: 0.4s; }
+.hero-text .actions { animation-delay: 0.5s; }
+.hero-text .social { animation-delay: 0.6s; }
+
+/* Profile image entrance */
+@keyframes photoReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.photo {
+    animation: photoReveal 1s ease 0.3s both;
+}
+
+/* Gentle floating effect */
+@keyframes floatPhoto {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.photo img {
+    animation: floatPhoto 4s ease-in-out infinite;
+}
+
+/* Project and skill card hover */
+.card {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+}
+
+/* Skill tag hover */
+.tags li {
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.tags li:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+}
+
+/* Endpoint card */
+.endpoint {
+    animation: fadeUp 0.9s ease 0.5s both;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.endpoint:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+}
+
+/* Button interaction */
+.btn {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Navigation interaction */
+.nav nav a {
+    transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .hero-text > *,
+    .photo,
+    .photo img,
+    .endpoint {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
+
+    .card:hover,
+    .tags li:hover,
+    .btn:hover,
+    .endpoint:hover {
+        transform: none;
+    }
+}
+
 :root{--bg:#f4f6f8;--surface:#fff;--ink:#0d1b2a;--muted:#4a5a6b;--line:#d5dce3;--accent:#0b7f74;--accent-ink:#fff;--warn:#b86e00;--radius:14px;
 --display:'Bricolage Grotesque',system-ui,sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
 :root[data-theme=dark]{--bg:#0d1b2a;--surface:#13263a;--ink:#e8eef4;--muted:#9db0c2;--line:#25405a;--accent:#3dd6c4;--accent-ink:#06211e;--warn:#f2a33a}
@@ -70,3 +200,57 @@ input,textarea{display:block;width:100%;margin-top:.3rem;padding:.65rem .8rem;bo
  .nav nav.open{display:flex}.nav nav a{padding:.8rem 0}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
+
+
+/* ===== STAGGERED SCROLL REVEAL ===== */
+
+.reveal {
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Preserve card reveal and hover effects */
+.card.reveal {
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Card hover */
+.card.reveal.in:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+}
+
+/* Social links */
+.social a {
+  display: inline-block;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.social a:hover {
+  transform: translateY(-3px);
+  color: var(--accent);
+}
+
+/* Brand animation */
+.brand {
+  transition: transform 0.25s ease;
+}
+
+.brand:hover {
+  transform: scale(1.05);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition-delay: 0ms !important;
+  }
+
+  .social a:hover,
+  .brand:hover {
+    transform: none;
+  }
+}
